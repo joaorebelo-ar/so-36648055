@@ -30,9 +30,14 @@ public class Teste {
 	p1.setId(1L);
 	p1.setChildren(Arrays.asList(c1, c2));
 	
+	c1.setParent(p1);
+	c2.setParent(p1);
+	
 	Parent p2 = new Parent();
 	p2.setId(2L);
 	p2.setChildren(Arrays.asList(c3));
+	
+	c3.setParent(p2);
 	
 	System.out.println(c1);
 	System.out.println(c2);
@@ -52,15 +57,15 @@ public class Teste {
 	
 	em.flush();
 	
-	em.refresh(c1);
-	em.refresh(c2);
-	em.refresh(c3);
+//	em.refresh(c1);
+//	em.refresh(c2);
+//	em.refresh(c3);
 	em.refresh(p1);
 	em.refresh(p2);
 	
 	c1 = em.find(Child.class, 1L);
 	
-	System.out.println(c1.getParent().getChildren());
+	System.out.println(em.createQuery("select c from Child c", Child.class).getResultList());
 	System.out.println(c1);
 	System.out.println(c2);
 	System.out.println(c3);
@@ -81,6 +86,9 @@ public class Teste {
 	System.out.println(c3);
 	System.out.println(p1);
 	System.out.println(p2);
+	
+	System.out.println(em.createQuery("select c from Child c", Child.class).getResultList());
+	
     }
     
 }

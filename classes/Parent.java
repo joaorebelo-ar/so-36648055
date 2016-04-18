@@ -20,9 +20,6 @@ import javax.persistence.Table;
 public class Parent {
     
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    @JoinTable(name = "PARENT_CHILD",
-               joinColumns = { @JoinColumn(name = "ID_PARENT")},
-               inverseJoinColumns = { @JoinColumn(name = "ID_CHILD") }) 
     List<Child> children;
     
     @Id
